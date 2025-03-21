@@ -10,13 +10,13 @@ export class WalletController {
     constructor(private readonly walletService: WalletService) { }
 
     @Get()
-    async getWallet(@GetUser() user) {
+    async getWallet(@GetUser() user: { auth0Id: string }) {
         return this.walletService.getWallet(user.auth0Id);
     }
 
     @Put()
     async updateWallet(
-        @GetUser() user,
+        @GetUser() user: { auth0Id: string },
         @Body() updateWalletDto: UpdateWalletDto,
     ) {
         return this.walletService.updateWallet(user.auth0Id, updateWalletDto);
