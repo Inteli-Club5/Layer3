@@ -5,9 +5,9 @@
   "scripts": {
     "start": "npm run build-client && node index.js",
     "dev": "npm run dev-client && nodemon index.js",
-    "build-client": "npm run clean && parcel build client/src/index.html --out-dir client/dist",
-    "dev-client": "npm run clean && parcel client/src/index.html --out-dir client/dist",
-    "clean": "rmdir /s /q .cache client\\dist"
+    "build-client": "npm run clean && parcel build src/index.html --out-dir dist",
+    "dev-client": "npm run clean && parcel src/index.html --out-dir dist",
+    "clean": "rm -rf .cache dist"
   },
   "keywords": [],
   "author": "Club5",
