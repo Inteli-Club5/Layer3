@@ -8,7 +8,10 @@ import { JwtPayload } from './interfaces/jwt-payload.interface';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(BaseStrategy) {
-  constructor(configService: ConfigService) {
+  constructor(
+    private configService: ConfigService,
+    private auth0Service: Auth0Service
+  ) {
     super({
       secretOrKeyProvider: passportJwtSecret({
         cache: true,
@@ -26,19 +29,14 @@ export class JwtStrategy extends PassportStrategy(BaseStrategy) {
     });
   }
 
-  validate(payload: JwtPayload): JwtPayload {
-    const minimumScope = ['openid', 'profile', 'email'];
-
-    if (
-      payload?.scope
-        ?.split(' ')
-        .filter((scope) => minimumScope.indexOf(scope) > -1).length !== 3
-    ) {
-      throw new UnauthorizedException(
-        'JWT does not possess the required scope (`openid profile email`).',
-      );
+  async validate(payload: any) {
+    const user = await this.auth0Service.findUserByAuth0Id(payload.sub);
+    if (!user) {
+      return {
+        auth0Id: payload.sub,
+        email: payload.email,
+      };
     }
-
-    return payload;
+    return user;
   }
 }
