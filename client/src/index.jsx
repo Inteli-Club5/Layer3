@@ -8,11 +8,15 @@ import './index.css';
 const domNode = document.getElementById('root');
 const root = createRoot(domNode);
 
+const domainAuth0 = process.env.REACT_APP_AUTH0_DOMAIN;
+const clientIdAuth0 = process.env.REACT_APP_AUTH0_CLIENT_ID;
+const audienceAuth0 = process.env.REACT_APP_AUTH0_AUDIENCE;
+
 root.render(
     <Auth0Provider
-        domain="dev-2jrx2l6q8vketrf2.us.auth0.com"
-        clientId="j9BsiRfiNJCOOzDSEpjmB7921rAggwH2"
-        audience="https://dev-2jrx2l6q8vketrf2.us.auth0.com/api/v2/"
+        domain={domainAuth0}
+        clientId={clientIdAuth0}
+        audience={audienceAuth0}
         authorizationParams={{
             redirect_uri: window.location.origin,
             scope: "openid profile email"
