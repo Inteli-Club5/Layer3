@@ -1,7 +1,4 @@
 # Ignorar pastas específicas
-./dist/
-.cache/
-./node_modules/
-./client/dist/
-./client/.cache/
-./client/node_modules/
+*dist/
+*.cache/
+*node_modules/

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import Login from './Login';
 import Wallet from './Wallet';
@@ -7,8 +7,8 @@ import Wallet from './Wallet';
 class App extends Component {
     render() {
         return (
-            <div>
-                <div>
+            <div className="app">
+                <div className="content">
                     <Routes>
                         <Route path="/" element={<Home/>}/>
                         <Route path="/login" element={<Login/>}/>

@@ -1,12 +1,10 @@
 {
   "name": "hackathon-xion",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "npm run build-client && node index.js",
-    "dev": "npm run dev-client && nodemon index.js",
-    "build-client": "parcel build src/index.html --out-dir dist",
-    "dev-client": "parcel src/index.html --out-dir dist"
+    "dev": "vite",
+    "build": "vite build"
   },
   "keywords": [],
   "author": "Club5",
@@ -14,14 +12,14 @@
   "description": "A project developed for xion hackathon",
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "express": "^4.21.2",
-    "parcel-bundler": "^1.12.5",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-google-button": "^0.8.0",
     "react-router-dom": "^6.4.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.9"
+    "vite": "^6.2.2"
   }
 }

@@ -11,7 +11,7 @@ const Wallet = () => {
                 </Link>
             </div>
             <center>
-                <div class="menu">
+                <div className="menu">
                     <p>Home</p>
                     <p>History</p>
                     <p>Education</p>
