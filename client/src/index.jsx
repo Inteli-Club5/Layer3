@@ -8,9 +8,9 @@ import './index.css';
 const domNode = document.getElementById('root');
 const root = createRoot(domNode);
 
-const domainAuth0 = process.env.REACT_APP_AUTH0_DOMAIN;
-const clientIdAuth0 = process.env.REACT_APP_AUTH0_CLIENT_ID;
-const audienceAuth0 = process.env.REACT_APP_AUTH0_AUDIENCE;
+const domainAuth0 = import.meta.env.VITE_AUTH0_DOMAIN;
+const clientIdAuth0 = import.meta.env.VITE_AUTH0_CLIENT_ID;
+const audienceAuth0 = import.meta.env.VITE_AUTH0_AUDIENCE;
 
 root.render(
     <Auth0Provider

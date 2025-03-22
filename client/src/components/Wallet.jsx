@@ -21,28 +21,28 @@ const Wallet = () => {
             </div>
             <br />
             <div className="menu">
-                <Link class="linkin" to="/wallet">
-                    <p class="ativado">Home</p>
+                <Link className="linkin" to="/wallet">
+                    <p className="ativado">Home</p>
                 </Link>
-                <Link class="linkinzin" to="/history">
+                <Link className="linkinzin" to="/history">
                     <p>History</p>
                 </Link>
-                <Link class="linkinzin" to="/education">
+                <Link className="linkinzin" to="/education">
                     <p>Education</p>
                 </Link>
             </div>
             <br />
             <div className="carteira">
-                <p class="primeiro">Personal Account</p>
+                <p className="primeiro">Personal Account</p>
                 <br />
-                <p class="segundo">$ 0.00</p>
+                <p className="segundo">$ 0.00</p>
                 <br />
-                <div class="botoes">
+                <div className="botoes">
                     <button>
                         <img src={button_one} alt="Receive" />
                         Receive
                     </button>
-                    <button class="lado">
+                    <button className="lado">
                         <img src={button_two} alt="Send" />
                         Send
                     </button>
@@ -53,28 +53,28 @@ const Wallet = () => {
                 </div>
                 <br />
                 <hr />
-                <div class="carteira2">
-                    <div class="first">
-                        <img class="token" alt="xion" src={xion} />
+                <div className="carteira2">
+                    <div className="first">
+                        <img className="token" alt="xion" src={xion} />
                         <p>XION</p>
                     </div>
-                    <div class="second">
-                        <p class="gigante">$ 0.00</p>
-                        <p class="informacao">Current price</p>
+                    <div className="second">
+                        <p className="gigante">$ 0.00</p>
+                        <p className="informacao">Current price</p>
                     </div>
-                    <div class="second">
-                        <p class="gigante">$ 0.00</p>
-                        <p class="informacao">0.0000 XION</p>
+                    <div className="second">
+                        <p className="gigante">$ 0.00</p>
+                        <p className="informacao">0.0000 XION</p>
                     </div>
                 </div>
             </div>
             <br />
             <div className="carteira">
-                <p class="primeiro">Personal Account</p>
+                <p className="primeiro">Personal Account</p>
                 <br />
-                <p class="segundo">$ 0.00</p>
+                <p className="segundo">$ 0.00</p>
                 <br />
-                <div class="botoes">
+                <div className="botoes">
                     <button>
                         <img src={button_one} alt="Receive" />
                         Receive
@@ -90,20 +90,20 @@ const Wallet = () => {
                 </div>
                 <br />
                 <hr />
-                <div class="carteira22">
-                    <div class="first">
-                        <img class="tokenzin" alt="first" src={first} />
-                        <img class="token" alt="eth" src={eth} />
+                <div className="carteira22">
+                    <div className="first">
+                        <img className="tokenzin" alt="first" src={first} />
+                        <img className="token" alt="eth" src={eth} />
                         <p>ETH</p>
-                        <img class="token2" alt="second" src={second} />
+                        <img className="token2" alt="second" src={second} />
                     </div>
-                    <div class="second">
-                        <p class="gigante">$ 0.00</p>
-                        <p class="informacao">Current price</p>
+                    <div className="second">
+                        <p className="gigante">$ 0.00</p>
+                        <p className="informacao">Current price</p>
                     </div>
-                    <div class="second">
-                        <p class="gigante">$ 0.00</p>
-                        <p class="informacao">0.0000 ETH</p>
+                    <div className="second">
+                        <p className="gigante">$ 0.00</p>
+                        <p className="informacao">0.0000 ETH</p>
                     </div>
                 </div>
             </div>
@@ -111,35 +111,35 @@ const Wallet = () => {
             <div className="carteira">
                 <p>History Preview</p>
                 <hr />
-                <div class="ladinho">
-                    <p class="pequeno">0x45fb83493a5c96be...</p>
-                    <p class="pequeno">0.3 XION</p>
-                    <p class="pequeno">20/2025</p>
+                <div className="ladinho">
+                    <p className="pequeno">0x45fb83493a5c96be...</p>
+                    <p className="pequeno">0.3 XION</p>
+                    <p className="pequeno">20/2025</p>
                 </div>
-                <div class="ladinho">
-                    <p class="pequeno">0x45fb83493a5c96be...</p>
-                    <p class="pequeno">0.3 XION</p>
-                    <p class="pequeno">20/2025</p>
+                <div className="ladinho">
+                    <p className="pequeno">0x45fb83493a5c96be...</p>
+                    <p className="pequeno">0.3 XION</p>
+                    <p className="pequeno">20/2025</p>
                 </div>
-                <div class="ladinho">
-                    <p class="pequeno">0x45fb83493a5c96be...</p>
-                    <p class="pequeno">0.3 XION</p>
-                    <p class="pequeno">20/2025</p>
+                <div className="ladinho">
+                    <p className="pequeno">0x45fb83493a5c96be...</p>
+                    <p className="pequeno">0.3 XION</p>
+                    <p className="pequeno">20/2025</p>
                 </div>
                 <div />
                 <br />
                 <br />
                 <br />
                 <center>
-                    <Link class="linkin" to="/history">
+                    <Link className="linkin" to="/history">
                         <button>History</button>
                     </Link>
                 </center>
             </div>
             <br/>
             <div>
-                <Link class="linkin" to="/education">
-                    <img class="tam" alt="learn" src={learn} />
+                <Link className="linkin" to="/education">
+                    <img className="tam" alt="learn" src={learn} />
                 </Link>
             </div>
             <br/>
