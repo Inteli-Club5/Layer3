@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "build:extension": "vite build --config extension/vite.config.js --outDir dist-extension"
   },
   "keywords": [],
   "author": "Club5",
@@ -17,7 +18,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-google-button": "^0.8.0",
-    "react-router-dom": "^6.4.0"
+    "react-router-dom": "^6.4.0",
+    "vite-plugin-static-copy": "^2.3.0"
   },
   "devDependencies": {
     "vite": "^6.2.2"
