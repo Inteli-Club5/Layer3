@@ -1,10 +1,26 @@
 {
-    "manifest_version": 3,
-    "name": "React Chrome Extension",
-    "version": "1.0.0",
-    "description": "A simple React app as a Chrome extension",
-    "action": {
-      "default_popup": "extension/index.html"
-    },
-    "permissions": []
-  }
+  "manifest_version": 3,
+  "name": "Hackathon Xion Extension",
+  "version": "1.0.0",
+  "description": "An extension created for Hackathon Xion.",
+  "action": {
+    "default_popup": "extension/index.html",
+    "default_icon": "assets/icons/Vector.ico",
+    "default_height": 450,
+    "default_width": 300
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["index.js"]
+    }
+  ]
+}

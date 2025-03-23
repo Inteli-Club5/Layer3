@@ -11,6 +11,10 @@ export default defineConfig({
                 {
                     src: 'extension/manifest.json', // Correct path to the manifest file
                     dest: '.' // Copy it to the root of the output directory
+                },
+                {
+                    src: 'extension/assets/*', // Assets folder
+                    dest: './assets' // Copy to assets folder in output directory
                 }
             ]
         })
