@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import Login from './Login';
 import Wallet from './Wallet';
+import History from './History';
 import Education from './Education';
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/wallet" element={<Wallet/>}/>
                         <Route path="/education" element={<Education/>}/>
+                        <Route path="/history" element={<History/>}/>
                     </Routes>
                 </div>
             </div>

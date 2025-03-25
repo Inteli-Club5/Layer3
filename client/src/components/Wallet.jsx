@@ -126,7 +126,7 @@ const Wallet = () => {
                     <p className="pequeno">0.3 XION</p>
                     <p className="pequeno">20/2025</p>
                 </div>
-                <div />
+            <div />
                 <br />
                 <br />
                 <br />
