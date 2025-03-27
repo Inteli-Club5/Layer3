@@ -34,10 +34,6 @@ const Wallet = () => {
                         <img src={button_two} alt="Send" />
                         Send
                     </button>
-                    <button>
-                        <img src={button_three} alt="Interact" />
-                        Interact
-                    </button>
                 </div>
                 <br />
                 <hr />
@@ -70,10 +66,6 @@ const Wallet = () => {
                     <button>
                         <img src={button_two} alt="Send" />
                         Send
-                    </button>
-                    <button>
-                        <img src={button_three} alt="Interact" />
-                        Interact
                     </button>
                 </div>
                 <br />
