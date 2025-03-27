@@ -7,7 +7,6 @@ import first from './imgs/first.png';
 import second from './imgs/second.png';
 import button_one from './imgs/BorrowBook.png';
 import button_two from './imgs/Sent.png';
-import button_three from './imgs/Testnet.png';
 import learn from './imgs/learn.png';
 
 const Wallet = () => {
@@ -46,10 +45,6 @@ const Wallet = () => {
                         <img src={button_two} alt="Send" />
                         Send
                     </button>
-                    <button>
-                        <img src={button_three} alt="Interact" />
-                        Interact
-                    </button>
                 </div>
                 <br />
                 <hr />
@@ -78,14 +73,6 @@ const Wallet = () => {
                     <button>
                         <img src={button_one} alt="Receive" />
                         Receive
-                    </button>
-                    <button>
-                        <img src={button_two} alt="Send" />
-                        Send
-                    </button>
-                    <button>
-                        <img src={button_three} alt="Interact" />
-                        Interact
                     </button>
                 </div>
                 <br />
