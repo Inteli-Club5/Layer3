@@ -11,14 +11,75 @@ import button_three from '../src/components/imgs/Testnet.png';
 import learn from '../src/components/imgs/learn.png';
 
 const Wallet = () => {
+
+    const [transactions, setTransactions] = useState([]);
+    const [xionPrice, setXionPrice] = useState(0);
+    const [ethPrice, setEthPrice] = useState(0);
+
+    const cryptoCompareApiKey = import.meta.env.VITE_CRYPTO_COMPARE_API_KEY;
+    useEffect(() => {
+
+        const fetchTransactions = async () => {
+            try {
+                const blockInfoRes = await fetch("https://rpc.xion-testnet-2.burnt.com/abci_info");
+                const blockInfoData = await blockInfoRes.json();
+                const lastBlockHeight = blockInfoData.result.response.last_block_height;
+                const txRes = await fetch(`https://api.xion-testnet-2.burnt.com/cosmos/tx/v1beta1/txs/block/${lastBlockHeight}`);
+                const txData = await txRes.json();
+                setTransactions(txData.txs || []);
+            } catch (error) {
+                console.error("Error: ", error);
+            }
+        };
+
+        const fetchXionPrice = async () => {
+            try {
+                const res = await fetch(
+                    `https://min-api.cryptocompare.com/data/price?fsym=XION&tsyms=USD&api_key=${cryptoCompareApiKey}`
+                );
+
+                const data = await res.json();
+                setXionPrice(data.USD || 0);
+            } catch (error) {
+                console.error("Error fetching XION price:", error);
+            }
+        };
+
+        const fetchEthPrice = async () => {
+            try {
+                const res = await fetch(
+                    `https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD&api_key=${cryptoCompareApiKey}`
+                );
+
+                const data = await res.json();
+                setEthPrice(data.USD || 0);
+            } catch (error) {
+                console.error("Error fetching Ethereum price:", error);
+            }
+        };
+
+        fetchTransactions();
+        fetchXionPrice();
+        fetchEthPrice();
+    }, []);
+
     return (
         <div className="wallet">
-            <br/>
+            <br />
             <div className="logozinha">
-                <Link to="/">
+                <Link to="/wallet">
                     <img alt="logo" src={logo} />
                 </Link>
-            </div>            
+            </div>
+            <br />
+            <div className="menu">
+                <Link className="linkin" to="/wallet">
+                    <p className="ativado">Home</p>
+                </Link>
+                <Link className="linkinzin" to="/history">
+                    <p>History</p>
+                </Link>
+            </div>
             <br />
             <div className="carteira">
                 <p className="primeiro">Personal Account</p>
@@ -26,14 +87,18 @@ const Wallet = () => {
                 <p className="segundo">$ 0.00</p>
                 <br />
                 <div className="botoes">
-                    <button>
-                        <img src={button_one} alt="Receive" />
-                        Receive
-                    </button>
-                    <button className="lado">
-                        <img src={button_two} alt="Send" />
-                        Send
-                    </button>
+                    <Link className="nothing" to="/receive-xion">
+                        <button>
+                            <img src={button_one} alt="Receive" />
+                            Receive
+                        </button>
+                    </Link>
+                    <Link className="nothing" to="/send">
+                        <button className="lado">
+                            <img src={button_two} alt="Send" />
+                            Send
+                        </button>
+                    </Link>
                 </div>
                 <br />
                 <hr />
@@ -43,7 +108,7 @@ const Wallet = () => {
                         <p>XION</p>
                     </div>
                     <div className="second">
-                        <p className="gigante">$ 0.00</p>
+                        <p className="gigante">${xionPrice.toFixed(2)}</p>
                         <p className="informacao">Current price</p>
                     </div>
                     <div className="second">
@@ -59,14 +124,12 @@ const Wallet = () => {
                 <p className="segundo">$ 0.00</p>
                 <br />
                 <div className="botoes">
-                    <button>
-                        <img src={button_one} alt="Receive" />
-                        Receive
-                    </button>
-                    <button>
-                        <img src={button_two} alt="Send" />
-                        Send
-                    </button>
+                    <Link className="nothing" to="/receive-eth">
+                        <button>
+                            <img src={button_one} alt="Receive" />
+                            Receive
+                        </button>
+                    </Link>
                 </div>
                 <br />
                 <hr />
@@ -78,7 +141,7 @@ const Wallet = () => {
                         <img className="token2" alt="second" src={second} />
                     </div>
                     <div className="second">
-                        <p className="gigante">$ 0.00</p>
+                        <p className="gigante">${ethPrice.toFixed(2)}</p>
                         <p className="informacao">Current price</p>
                     </div>
                     <div className="second">
@@ -89,40 +152,23 @@ const Wallet = () => {
             </div>
             <br />
             <div className="carteira">
-                <p>History Preview</p>
+                <p>Transaction History</p>
                 <hr />
-                <div className="ladinho">
-                    <p className="pequeno">0x45fb83493a5c96be...</p>
-                    <p className="pequeno">0.3 XION</p>
-                    <p className="pequeno">20/2025</p>
-                </div>
-                <div className="ladinho">
-                    <p className="pequeno">0x45fb83493a5c96be...</p>
-                    <p className="pequeno">0.3 XION</p>
-                    <p className="pequeno">20/2025</p>
-                </div>
-                <div className="ladinho">
-                    <p className="pequeno">0x45fb83493a5c96be...</p>
-                    <p className="pequeno">0.3 XION</p>
-                    <p className="pequeno">20/2025</p>
-                </div>
+                {transactions.length > 0 ? (
+                    transactions.map((tx, index) => (
+                        <div key={index} className="ladinho">
+                            <p className="pequeno">{tx.substring(0, 20)}...</p>
+                        </div>
+                    ))
+                ) : (
+                    <p className="pequeno">No Data</p>
+                )}
                 <div />
                 <br />
                 <br />
                 <br />
-                <center>
-                    <Link className="linkin" to="/history">
-                        <button>History</button>
-                    </Link>
-                </center>
             </div>
-            <br/>
-            <div>
-                <Link className="linkin" to="/education">
-                    <img className="tam" alt="learn" src={learn} />
-                </Link>
-            </div>
-            <br/>
+            <br />
         </div>
     );
 };

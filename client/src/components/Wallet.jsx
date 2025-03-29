@@ -15,7 +15,9 @@ const Wallet = () => {
     const [xionPrice, setXionPrice] = useState(0);
     const [ethPrice, setEthPrice] = useState(0);
 
+    const cryptoCompareApiKey = import.meta.env.VITE_CRYPTO_COMPARE_API_KEY;
     useEffect(() => {
+
         const fetchTransactions = async () => {
             try {
                 const blockInfoRes = await fetch("https://rpc.xion-testnet-2.burnt.com/abci_info");
@@ -31,21 +33,27 @@ const Wallet = () => {
 
         const fetchXionPrice = async () => {
             try {
-                const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=xion&vs_currencies=usd");
+                const res = await fetch(
+                    `https://min-api.cryptocompare.com/data/price?fsym=XION&tsyms=USD&api_key=${cryptoCompareApiKey}`
+                );
+
                 const data = await res.json();
-                setXionPrice(data.xion.usd || 0);
+                setXionPrice(data.USD || 0);
             } catch (error) {
-                console.error("Erro ao buscar preço do XION:", error);
+                console.error("Error fetching XION price:", error);
             }
         };
 
         const fetchEthPrice = async () => {
             try {
-                const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd");
+                const res = await fetch(
+                    `https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD&api_key=${cryptoCompareApiKey}`
+                );
+
                 const data = await res.json();
-                setEthPrice(data.ethereum.usd || 0);
+                setEthPrice(data.USD || 0);
             } catch (error) {
-                console.error("Erro ao buscar preço do Ethereum:", error);
+                console.error("Error fetching Ethereum price:", error);
             }
         };
 
@@ -53,7 +61,7 @@ const Wallet = () => {
         fetchXionPrice();
         fetchEthPrice();
     }, []);
-
+    
     return (
         <div className="wallet">
             <br />
@@ -146,7 +154,7 @@ const Wallet = () => {
             </div>
             <br />
             <div className="carteira">
-            <p>Transaction History</p>
+                <p>Transaction History</p>
                 <hr />
                 {transactions.length > 0 ? (
                     transactions.map((tx, index) => (
