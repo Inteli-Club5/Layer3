@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../src/components/imgs/layer3.png';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import xion from '../src/components/imgs/xion_token.png';
 import eth from '../src/components/imgs/eth_token.png';
 import first from '../src/components/imgs/first.png';
 import second from '../src/components/imgs/second.png';
 import button_one from '../src/components/imgs/BorrowBook.png';
 import button_two from '../src/components/imgs/Sent.png';
-import button_three from '../src/components/imgs/Testnet.png';
-import learn from '../src/components/imgs/learn.png';
 
 const Wallet = () => {
 
@@ -67,17 +65,8 @@ const Wallet = () => {
         <div className="wallet">
             <br />
             <div className="logozinha">
-                <Link to="/wallet">
+                <Link to="/">
                     <img alt="logo" src={logo} />
-                </Link>
-            </div>
-            <br />
-            <div className="menu">
-                <Link className="linkin" to="/wallet">
-                    <p className="ativado">Home</p>
-                </Link>
-                <Link className="linkinzin" to="/history">
-                    <p>History</p>
                 </Link>
             </div>
             <br />
