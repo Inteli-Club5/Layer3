@@ -1,8 +1,32 @@
-import React from 'react';
-import logo from './imgs/layer3.png';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import logo from "./imgs/layer3.png";
+import { Link } from "react-router-dom";
 
 const History = () => {
+    const [transactions, setTransactions] = useState([]);
+
+    useEffect(() => {
+        const fetchTransactions = async () => {
+            try {
+                // 1️⃣ Buscar o índice do último bloco
+                const blockInfoRes = await fetch("https://rpc.xion-testnet-2.burnt.com/abci_info");
+                const blockInfoData = await blockInfoRes.json();
+                const lastBlockHeight = blockInfoData.result.response.last_block_height;
+
+                // 2️⃣ Buscar transações do último bloco
+                const txRes = await fetch(`https://api.xion-testnet-2.burnt.com/cosmos/tx/v1beta1/txs/block/${lastBlockHeight}`);
+                const txData = await txRes.json();
+
+                // 3️⃣ Atualizar estado com as transações
+                setTransactions(txData.txs || []);
+            } catch (error) {
+                console.error("Error: ", error);
+            }
+        };
+
+        fetchTransactions();
+    }, []);
+
     return (
         <div className="wallet">
             <br />
@@ -27,44 +51,30 @@ const History = () => {
             <div className="carteira">
                 <p>Transaction History</p>
                 <hr />
-                <div className="ladinho">
-                    <p className="pequeno">0x45fb83493a5c96be...</p>
-                    <p className="pequeno">0.3 XION</p>
-                    <p className="pequeno">20/2025</p>
-                </div>
-                <div className="ladinho">
-                    <p className="pequeno">0x45fb83493a5c96be...</p>
-                    <p className="pequeno">0.3 XION</p>
-                    <p className="pequeno">20/2025</p>
-                </div>
-                <div className="ladinho">
-                    <p className="pequeno">0x45fb83493a5c96be...</p>
-                    <p className="pequeno">0.3 XION</p>
-                    <p className="pequeno">20/2025</p>
-                </div>
-                <div className="ladinho">
-                    <p className="pequeno">0x45fb83493a5c96be...</p>
-                    <p className="pequeno">0.3 XION</p>
-                    <p className="pequeno">20/2025</p>
-                </div>
-                <div className="ladinho">
-                    <p className="pequeno">0x45fb83493a5c96be...</p>
-                    <p className="pequeno">0.3 XION</p>
-                    <p className="pequeno">20/2025</p>
-                </div>
-                <div className="ladinho">
-                </div>
+                {transactions.length > 0 ? (
+                    transactions.map((tx, index) => (
+                        <div key={index} className="ladinho">
+                            <p className="pequeno">{tx.substring(0, 20)}...</p>
+                        </div>
+                    ))
+                ) : (
+                    <p className="pequeno">No Data</p>
+                )}
                 <br />
                 <br />
                 <br />
-                <center>
-                    <button>Show More</button>
-                </center>
+                <br />
+                <br />
             </div>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
         </div>
-    )
+    );
 };
 
 export default History;

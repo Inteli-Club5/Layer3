@@ -34,15 +34,23 @@ const Education = () => {
             <div className="gallery">
                 <div className="row">
                     <img className="square" src={img1} alt="Imagem 1" />
-                    <img className="rectangle" src={img2} alt="Imagem 2" />
+                    <a href="https://lp.nearx.com.br/imeersao-dev25k-bh">
+                        <img className="rectangle" src={img2} alt="Imagem 2" />
+                    </a>
                 </div>
                 <div className="row">
-                    <img className="rectangle" src={img3} alt="Imagem 3" />
+                    <a href="https://nearx.com.br/">
+                        <img className="rectangle" src={img3} alt="Imagem 3" />
+                    </a>
                     <img className="square" src={img4} alt="Imagem 4" />
                 </div>
                 <div className="row">
-                    <img className="square2" src={img5} alt="Imagem 5" />
-                    <img className="square2" src={img6} alt="Imagem 6" />
+                    <Link to="/wallet">
+                        <img className="square2" src={img5} alt="Imagem 5" />
+                    </Link>
+                    <a href="https://x.com/nearxschool">
+                        <img className="square2" src={img6} alt="Imagem 6" />
+                    </a>
                     <img className="square2" src={img7} alt="Imagem 7" />
                 </div>
             </div>
