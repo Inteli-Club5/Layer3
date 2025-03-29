@@ -7,6 +7,7 @@ import History from './History';
 import Education from './Education';
 import ReceiveETH from './ReceiveETH';
 import ReceiveXion from './ReceiveXion';
+import Send from './Send';
 
 class App extends Component {
     render() {
@@ -21,6 +22,7 @@ class App extends Component {
                         <Route path="/history" element={<History/>}/>
                         <Route path="/receive-eth" element={<ReceiveETH/>}/>
                         <Route path="/receive-xion" element={<ReceiveXion/>}/>
+                        <Route path="/send" element={<Send/>}/>
                     </Routes>
                 </div>
             </div>

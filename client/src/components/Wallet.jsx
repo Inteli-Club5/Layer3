@@ -87,10 +87,12 @@ const Wallet = () => {
                             Receive
                         </button>
                     </Link>
-                    <button className="lado">
-                        <img src={button_two} alt="Send" />
-                        Send
-                    </button>
+                    <Link className="nothing" to="/send">
+                        <button className="lado">
+                            <img src={button_two} alt="Send" />
+                            Send
+                        </button>
+                    </Link>
                 </div>
                 <br />
                 <hr />

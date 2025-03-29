@@ -3,6 +3,7 @@ import logo from './imgs/layer3.png';
 import { Link } from 'react-router-dom';
 import QRCodeStyling from "qr-code-styling";
 import share from './imgs/share.png';
+import xion from './imgs/xion_token.png';
 
 const ReceiveXion = () => {
     const qrRef = useRef(null);
@@ -40,7 +41,10 @@ const ReceiveXion = () => {
             <br />
             <div className="carteira">
                 <center>
-                    <p>Your Xion Address</p>
+                    <div className="first">
+                        <img className="token" alt="xion" src={xion} />
+                        <p>XION Address</p>
+                    </div>
                     <br />
                     <div
                         ref={qrRef}
@@ -56,15 +60,15 @@ const ReceiveXion = () => {
                     <br />
                     <p className="pequena">{xionAddress}</p>
                     <hr />
-                    <button 
+                    <button
                         onClick={handleCopy}
                     >
-                        <img src={share} alt="Share"/>
+                        <img src={share} alt="Share" />
                         Share
                     </button>
                 </center>
             </div>
-            <br/><br/>
+            <br /><br />
         </div>
     );
 };

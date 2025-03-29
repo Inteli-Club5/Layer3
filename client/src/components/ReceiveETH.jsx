@@ -3,6 +3,7 @@ import logo from './imgs/layer3.png';
 import { Link } from 'react-router-dom';
 import QRCodeStyling from "qr-code-styling";
 import share from './imgs/share.png';
+import eth from './imgs/eth_token.png';
 
 const ReceiveETH = () => {
     const qrRef = useRef(null);
@@ -40,7 +41,10 @@ const ReceiveETH = () => {
             <br />
             <div className="carteira">
                 <center>
-                    <p>Your ETH Address</p>
+                    <div className="first">
+                        <img className="token" alt="eth" src={eth} />
+                        <p>ETH Address</p>
+                    </div>
                     <br />
                     <div
                         ref={qrRef}
@@ -56,15 +60,15 @@ const ReceiveETH = () => {
                     <br />
                     <p className="pequena">{ethAddress}</p>
                     <hr />
-                    <button 
+                    <button
                         onClick={handleCopy}
                     >
-                        <img src={share} alt="Share"/>
+                        <img src={share} alt="Share" />
                         Share
                     </button>
                 </center>
             </div>
-            <br/><br/>
+            <br /><br />
         </div>
     );
 };
