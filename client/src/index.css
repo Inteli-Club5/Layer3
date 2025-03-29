@@ -475,3 +475,21 @@ button img {
     font-size: 14px;
     color: #eee7e7;
 }
+
+.pequena2 {
+    font-size: 14px;
+    color: #eee7e7;
+}
+
+.pequena4 {
+    font-size: 14px;
+    color: #000000;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.left {
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
