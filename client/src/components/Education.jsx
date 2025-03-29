@@ -14,7 +14,7 @@ const Education = () => {
         <div className="education">
             <br />
             <div className="logozinha">
-                <Link to="/">
+                <Link to="/wallet">
                     <img alt="logo" src={logo} />
                 </Link>
             </div>

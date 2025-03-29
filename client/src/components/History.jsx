@@ -31,7 +31,7 @@ const History = () => {
         <div className="wallet">
             <br />
             <div className="logozinha">
-                <Link to="/">
+                <Link to="/wallet">
                     <img alt="logo" src={logo} />
                 </Link>
             </div>

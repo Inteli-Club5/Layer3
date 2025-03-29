@@ -58,7 +58,7 @@ const Wallet = () => {
         <div className="wallet">
             <br />
             <div className="logozinha">
-                <Link to="/">
+                <Link to="/wallet">
                     <img alt="logo" src={logo} />
                 </Link>
             </div>
@@ -81,10 +81,12 @@ const Wallet = () => {
                 <p className="segundo">$ 0.00</p>
                 <br />
                 <div className="botoes">
-                    <button>
-                        <img src={button_one} alt="Receive" />
-                        Receive
-                    </button>
+                    <Link className="nothing" to="/receive-xion">
+                        <button>
+                            <img src={button_one} alt="Receive" />
+                            Receive
+                        </button>
+                    </Link>
                     <button className="lado">
                         <img src={button_two} alt="Send" />
                         Send
@@ -114,10 +116,12 @@ const Wallet = () => {
                 <p className="segundo">$ 0.00</p>
                 <br />
                 <div className="botoes">
-                    <button>
-                        <img src={button_one} alt="Receive" />
-                        Receive
-                    </button>
+                    <Link className="nothing" to="/receive-eth">
+                        <button>
+                            <img src={button_one} alt="Receive" />
+                            Receive
+                        </button>
+                    </Link>
                 </div>
                 <br />
                 <hr />

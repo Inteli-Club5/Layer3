@@ -466,3 +466,12 @@ button img {
 .rectangle:hover {
     transform: scale(1.01);
 }
+
+.nothing {
+    text-decoration: none;
+}
+
+.pequena {
+    font-size: 14px;
+    color: #eee7e7;
+}
