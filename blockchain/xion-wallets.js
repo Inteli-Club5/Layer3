@@ -1,6 +1,6 @@
 // xion-wallets.js
 const { DirectSecp256k1HdWallet } = require("@cosmjs/proto-signing");
-const config = require('./xion-blockchain-example/config');
+const config = require('./config');
 
 /**
  * Gets the address associated with the configured mnemonic

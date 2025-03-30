@@ -1,6 +1,6 @@
 // xion-transactions.js
 const { getSigningClient } = require("./xion-connect");
-const { getMyAddress } = require("../xion-wallets");
+const { getMyAddress } = require("./xion-wallets");
 const config = require('./config');
 
 /**
