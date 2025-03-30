@@ -52,7 +52,7 @@ async function sendEthereumTransaction(privateKey, recipient, amount) {
     };
 
     const transaction = await wallet.sendTransaction(tx);
-    console.log("🚀 Transação enviada! Hash:", transaction.hash);
+    console.log("Transação enviada! Hash:", transaction.hash);
 }
 
 async function getBalanceXion () {
@@ -75,23 +75,3 @@ async function getBalanceEthereum() {
 }
 
 getBalanceEthereum();
-
-// async function runExamples() {
-//   try {
-//     const height = await getChainHeight();
-//     console.log(`Connected to XION blockchain at height: ${height}`);
-    
-//     const myAddress = await getMyAddress();
-//     console.log(`Your wallet address: ${myAddress}`);
-    
-//     const balance = await getBalance(myAddress);
-//     console.log(`Your balance: ${balance} uxion`);
-
-// } catch (error) {
-//     console.error("Error running examples:", error);
-//     console.error(error.stack);
-//   }
-// }
-
-// // Execute the examples
-// runExamples();
