@@ -6,6 +6,9 @@ const { ethers } = require("ethers");
 const config = require('./config');
 const { DirectSecp256k1HdWallet } = require("@cosmjs/proto-signing");
 
+const ALCHEMY_API_URL = config.ALCHEMY_API_URL; 
+const SENDER_PRIVATE_KEY = config.ETH_PRIVATE_KEY;
+
 async function getXionAddressFromMnemonic(mnemonic) {
     const wallet = await DirectSecp256k1HdWallet.fromMnemonic(mnemonic, { prefix: "xion" });
     const accounts = await wallet.getAccounts();
@@ -38,9 +41,6 @@ verifyXionOwnership(mnemonic, expectedXionAddress).then((isValid) => {
 
 
 async function sendEthereumTransaction(privateKey, recipient, amount) {
-    const ALCHEMY_API_URL = config.ALCHEMY_API_URL; 
-    const SENDER_PRIVATE_KEY = config.ETH_PRIVATE_KEY;
-    
     const provider = new ethers.JsonRpcProvider(ALCHEMY_API_URL);
     const wallet = new ethers.Wallet(SENDER_PRIVATE_KEY, provider);
 
@@ -55,15 +55,26 @@ async function sendEthereumTransaction(privateKey, recipient, amount) {
     console.log("🚀 Transação enviada! Hash:", transaction.hash);
 }
 
-async function getBalanceFrontend () {
+async function getBalanceXion () {
     const myAddress = await getMyAddress();
-    console.log(`Your wallet address: ${myAddress}`);
+    console.log(`Your Xion wallet address: ${myAddress}`);
     
     const balance = await getBalance(myAddress);
-    console.log(`Your balance: ${balance} uxion`);
+    console.log(`Your Xion balance: ${balance} uxion`);
 }
 
-getBalanceFrontend();
+getBalanceXion();
+
+async function getBalanceEthereum() {
+    const provider = new ethers.JsonRpcProvider(ALCHEMY_API_URL);
+    const wallet = new ethers.Wallet(SENDER_PRIVATE_KEY, provider);
+    
+    const balance = await provider.getBalance(wallet.address);
+    console.log(`Your Ethereum wallet address: ${wallet.address}`);
+    console.log(`Your Ethereum balance: ${ethers.formatEther(balance)} ETH`);
+}
+
+getBalanceEthereum();
 
 // async function runExamples() {
 //   try {
