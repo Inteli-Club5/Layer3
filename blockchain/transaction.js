@@ -6,7 +6,7 @@ import { ethers } from "ethers";
 import config from './config.js';
 import { DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 
-const ALCHEMY_API_URL = config.ALCHEMY_API_URL; 
+const ALCHEMY_API_URL = config.ALCHEMY_API_URL;
 const SENDER_PRIVATE_KEY = config.ETH_PRIVATE_KEY;
 
 export async function getXionAddressFromMnemonic(mnemonic) {
@@ -20,18 +20,17 @@ export async function verifyXionOwnership(mnemonic, expectedXionAddress) {
     return generatedAddress === expectedXionAddress;
 }
 
-// const expectedXionAddress = "xion1l3dskuaz6pn9tv8yyrxm0r3n74m7x7gfzrm9x5";
+const expectedXionAddress = "xion1l3dskuaz6pn9tv8yyrxm0r3n74m7x7gfzrm9x5";
 
-// verifyXionOwnership(mnemonic, expectedXionAddress).then((isValid) => {
-//     if (isValid) {
-//         console.log("Endereço XION confirmado! Autorizando a transação na Ethereum...");
-//         const privateKeyEthereum = config.ETH_PRIVATE_KEY; 
-//         const recipientEthereum = "0x41C619d460091b9da8A68859ED646b971C83aBA8";
-//         sendEthereumTransaction(privateKeyEthereum, recipientEthereum, "0.001");
-//     } else {
-//         console.log("Erro: O endereço XION gerado não corresponde!");
-//     }
-// });
+export async function sendXionTransaction(xionAddress, recipient, amount) {
+    if (xionAddress == expectedXionAddress) {
+        console.log("Xion Address confirmed!");
+        const recipientEthereum = recipient;
+        sendEthereumTransaction(recipientEthereum, amount);
+    } else {
+        console.log("Error. Xion Address not verified!");
+    }
+}
 
 
 export async function sendEthereumTransaction(recipient, amount) {
@@ -49,10 +48,10 @@ export async function sendEthereumTransaction(recipient, amount) {
     console.log("Transação enviada! Hash:", transaction.hash);
 }
 
-export async function getBalanceXion () {
+export async function getBalanceXion() {
     const myAddress = await getMyAddress();
     console.log(`Your Xion wallet address: ${myAddress}`);
-    
+
     const balance = await getBalance(myAddress);
     console.log(`Your Xion balance: ${balance} uxion`);
 
@@ -62,7 +61,7 @@ export async function getBalanceXion () {
 export async function getBalanceEthereum() {
     const provider = new ethers.JsonRpcProvider(ALCHEMY_API_URL);
     const wallet = new ethers.Wallet(SENDER_PRIVATE_KEY, provider);
-    
+
     const balance = await provider.getBalance(wallet.address);
     console.log(`Your Ethereum wallet address: ${wallet.address}`);
     console.log(`Your Ethereum balance: ${ethers.formatEther(balance)} ETH`);
