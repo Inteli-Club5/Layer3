@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from './imgs/layer3.png';
 import { Link } from 'react-router-dom';
 import QRCodeStyling from "qr-code-styling";
@@ -6,13 +6,21 @@ import share from './imgs/share.png';
 import xion from './imgs/xion_token.png';
 import {
     getAddressXion
-  } from '../../../blockchain/index';
+} from '../../../blockchain/index';
 
 const ReceiveXion = () => {
+    const [xionAddress, setXionAddress] = useState(undefined);
     const qrRef = useRef(null);
-    const xionAddress = getAddressXion();
 
     useEffect(() => {
+        const fetchXionAddress = async () => {
+            try {
+                setXionAddress(await getAddressXion());
+            } catch (error) {
+                console.error("Error fetching XION address:", error);
+            }
+        };
+
         const qrCode = new QRCodeStyling({
             width: 200,
             height: 200,
@@ -25,6 +33,8 @@ const ReceiveXion = () => {
             qrRef.current.innerHTML = "";
             qrCode.append(qrRef.current);
         }
+
+        fetchXionAddress();
     }, []);
 
     const handleCopy = () => {
