@@ -1,28 +1,41 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from '../src/components/imgs/layer3.png';
 import { Link } from 'react-router-dom';
 import QRCodeStyling from "qr-code-styling";
 import share from '../src/components/imgs/share.png';
 import eth from '../src/components/imgs/eth_token.png';
+import {
+    getAddressEth
+} from '../../blockchain/index';
 
 const ReceiveETH = () => {
     const qrRef = useRef(null);
-    const ethAddress = "0x6a395e7AfD2Ddc7F68498f62D8AD3b72992E8Ab0";
+    const [ethAddress, setEthAddress] = useState(undefined);
 
     useEffect(() => {
-        const qrCode = new QRCodeStyling({
-            width: 200,
-            height: 200,
-            data: ethAddress,
-            dotsOptions: { color: "#000", type: "dots" },
-            backgroundOptions: { color: "#fff" },
-        });
+        const fetchAddressEth = async () => {
+            try {
+                setEthAddress(await getAddressEth());
+            } catch (error) {
+                console.error("Error fetching ETH address:", error);
+            }
+        };
 
-        if (qrRef.current) {
-            qrRef.current.innerHTML = "";
-            qrCode.append(qrRef.current);
-        }
+        fetchAddressEth();
     }, []);
+
+    const qrCode = new QRCodeStyling({
+        width: 200,
+        height: 200,
+        data: ethAddress,
+        dotsOptions: { color: "#000", type: "dots" },
+        backgroundOptions: { color: "#fff" },
+    });
+
+    if (qrRef.current) {
+        qrRef.current.innerHTML = "";
+        qrCode.append(qrRef.current);
+    }
 
     const handleCopy = () => {
         navigator.clipboard.writeText(ethAddress)
@@ -34,7 +47,7 @@ const ReceiveETH = () => {
         <div className="wallet">
             <br />
             <div className="logozinha">
-                <Link to="/">
+                <Link to="/wallet">
                     <img alt="logo" src={logo} />
                 </Link>
             </div>

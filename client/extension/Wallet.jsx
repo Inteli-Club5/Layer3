@@ -1,18 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from "react";
 import logo from '../src/components/imgs/layer3.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import xion from '../src/components/imgs/xion_token.png';
 import eth from '../src/components/imgs/eth_token.png';
 import first from '../src/components/imgs/first.png';
 import second from '../src/components/imgs/second.png';
 import button_one from '../src/components/imgs/BorrowBook.png';
 import button_two from '../src/components/imgs/Sent.png';
+import learn from '../src/components/imgs/learn.png';
+
+import {
+    getBalanceXion,
+    getBalanceEthereum
+  } from '../../blockchain/index';
 
 const Wallet = () => {
 
     const [transactions, setTransactions] = useState([]);
     const [xionPrice, setXionPrice] = useState(0);
     const [ethPrice, setEthPrice] = useState(0);
+    const [xionBalance, setXionBalance] = useState(0);
+    const [ethBalance, setEthBalance] = useState(0);
 
     const cryptoCompareApiKey = import.meta.env.VITE_CRYPTO_COMPARE_API_KEY;
     useEffect(() => {
@@ -56,6 +64,22 @@ const Wallet = () => {
             }
         };
 
+        const fetchBalances = async () => {
+            try {
+                const xionBalance = await getBalanceXion();
+                const ethBalance = await getBalanceEthereum();
+                console.log("XION Balance:", xionBalance);
+                console.log("ETH Balance:", ethBalance);
+
+                console.log(xionBalance);
+                setXionBalance(xionBalance);
+                setEthBalance(ethBalance);
+            } catch (error) {
+                console.error("Erro ao buscar saldos:", error);
+            }
+        };
+
+        fetchBalances();
         fetchTransactions();
         fetchXionPrice();
         fetchEthPrice();
@@ -65,15 +89,16 @@ const Wallet = () => {
         <div className="wallet">
             <br />
             <div className="logozinha">
-                <Link to="/">
+                <Link to="/wallet">
                     <img alt="logo" src={logo} />
                 </Link>
             </div>
+            <br />            
             <br />
             <div className="carteira">
                 <p className="primeiro">Personal Account</p>
                 <br />
-                <p className="segundo">$ 0.00</p>
+                <p className="segundo">${Number(xionBalance) * xionPrice.toFixed(2)}</p>
                 <br />
                 <div className="botoes">
                     <Link className="nothing" to="/receive-xion">
@@ -101,8 +126,8 @@ const Wallet = () => {
                         <p className="informacao">Current price</p>
                     </div>
                     <div className="second">
-                        <p className="gigante">$ 0.00</p>
-                        <p className="informacao">0.0000 XION</p>
+                        <p className="gigante">${(Number(xionBalance) * xionPrice).toFixed(2)}</p>
+                        <p className="informacao">{Number(xionBalance)} XION</p>
                     </div>
                 </div>
             </div>
@@ -110,7 +135,7 @@ const Wallet = () => {
             <div className="carteira">
                 <p className="primeiro">Personal Account</p>
                 <br />
-                <p className="segundo">$ 0.00</p>
+                <p className="segundo">${(Number(ethBalance) * ethPrice).toFixed(2)}</p>
                 <br />
                 <div className="botoes">
                     <Link className="nothing" to="/receive-eth">
@@ -134,8 +159,8 @@ const Wallet = () => {
                         <p className="informacao">Current price</p>
                     </div>
                     <div className="second">
-                        <p className="gigante">$ 0.00</p>
-                        <p className="informacao">0.0000 ETH</p>
+                        <p className="gigante">${(Number(ethBalance) * ethPrice).toFixed(2)}</p>
+                        <p className="informacao">{Number(ethBalance)} ETH</p>
                     </div>
                 </div>
             </div>
@@ -156,6 +181,17 @@ const Wallet = () => {
                 <br />
                 <br />
                 <br />
+                <center>
+                    <Link className="linkin" to="/history">
+                        <button>History</button>
+                    </Link>
+                </center>
+            </div>
+            <br />
+            <div>
+                <Link className="linkin" to="/education">
+                    <img className="tam" alt="learn" src={learn} />
+                </Link>
             </div>
             <br />
         </div>

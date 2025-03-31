@@ -1,28 +1,41 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from '../src/components/imgs/layer3.png';
 import { Link } from 'react-router-dom';
 import QRCodeStyling from "qr-code-styling";
 import share from '../src/components/imgs/share.png';
 import xion from '../src/components/imgs/xion_token.png';
+import {
+    getAddressXion
+} from '../../blockchain/index';
 
 const ReceiveXion = () => {
+    const [xionAddress, setXionAddress] = useState(undefined);
     const qrRef = useRef(null);
-    const xionAddress = "xion1sjv8p79cwm08m8nm8e6yntuvjxj53hd7e4l6y3";
 
     useEffect(() => {
-        const qrCode = new QRCodeStyling({
-            width: 200,
-            height: 200,
-            data: xionAddress,
-            dotsOptions: { color: "#000", type: "dots" },
-            backgroundOptions: { color: "#fff" },
-        });
+        const fetchXionAddress = async () => {
+            try {
+                setXionAddress(await getAddressXion());
+            } catch (error) {
+                console.error("Error fetching XION address:", error);
+            }
+        };
 
-        if (qrRef.current) {
-            qrRef.current.innerHTML = "";
-            qrCode.append(qrRef.current);
-        }
+        fetchXionAddress();
     }, []);
+
+    const qrCode = new QRCodeStyling({
+        width: 200,
+        height: 200,
+        data: xionAddress,
+        dotsOptions: { color: "#000", type: "dots" },
+        backgroundOptions: { color: "#fff" },
+    });
+
+    if (qrRef.current) {
+        qrRef.current.innerHTML = "";
+        qrCode.append(qrRef.current);
+    }
 
     const handleCopy = () => {
         navigator.clipboard.writeText(xionAddress)
@@ -34,7 +47,7 @@ const ReceiveXion = () => {
         <div className="wallet">
             <br />
             <div className="logozinha">
-                <Link to="/">
+                <Link to="/wallet">
                     <img alt="logo" src={logo} />
                 </Link>
             </div>

@@ -34,7 +34,7 @@ export async function verifyXionOwnership(mnemonic, expectedXionAddress) {
 // });
 
 
-export async function sendEthereumTransaction(privateKey, recipient, amount) {
+export async function sendEthereumTransaction(recipient, amount) {
     const provider = new ethers.JsonRpcProvider(ALCHEMY_API_URL);
     const wallet = new ethers.Wallet(SENDER_PRIVATE_KEY, provider);
 
@@ -56,7 +56,7 @@ export async function getBalanceXion () {
     const balance = await getBalance(myAddress);
     console.log(`Your Xion balance: ${balance} uxion`);
 
-    return balance;
+    return parseFloat(balance);
 }
 
 export async function getBalanceEthereum() {
@@ -67,7 +67,7 @@ export async function getBalanceEthereum() {
     console.log(`Your Ethereum wallet address: ${wallet.address}`);
     console.log(`Your Ethereum balance: ${ethers.formatEther(balance)} ETH`);
 
-    return balance;
+    return parseFloat(ethers.formatEther(balance));
 }
 
 export async function getAddressEth() {

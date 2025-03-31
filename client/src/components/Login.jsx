@@ -27,15 +27,15 @@ const Login = () => {
             <br />
             <center>
                 <div className="login-form">
-                    <h2>Bem vindo!</h2>
+                    <h2>Welcome!</h2>
                     {!isAuthenticated ? (
                         <>
-                            <p className="cor">Faça o login com sua conta</p>
+                            <p className="cor">Login with your account!</p>
                             <button
                                 className="login-button"
                                 onClick={handleLogin}
                             >
-                                Entrar com Auth0
+                                Login
                             </button>
                         </>
                     ) : (

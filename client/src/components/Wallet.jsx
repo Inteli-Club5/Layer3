@@ -137,7 +137,7 @@ const Wallet = () => {
                         <p className="informacao">Current price</p>
                     </div>
                     <div className="second">
-                        <p className="gigante">${Number(xionBalance) * xionPrice.toFixed(2)}</p>
+                        <p className="gigante">${(Number(xionBalance) * xionPrice).toFixed(2)}</p>
                         <p className="informacao">{Number(xionBalance)} XION</p>
                     </div>
                 </div>
@@ -146,7 +146,7 @@ const Wallet = () => {
             <div className="carteira">
                 <p className="primeiro">Personal Account</p>
                 <br />
-                <p className="segundo">${Number(ethBalance) * ethPrice.toFixed(2)}</p>
+                <p className="segundo">${(Number(ethBalance) * ethPrice).toFixed(2)}</p>
                 <br />
                 <div className="botoes">
                     <Link className="nothing" to="/receive-eth">
@@ -170,7 +170,7 @@ const Wallet = () => {
                         <p className="informacao">Current price</p>
                     </div>
                     <div className="second">
-                        <p className="gigante">${Number(ethBalance) * ethPrice.toFixed(2)}</p>
+                        <p className="gigante">${(Number(ethBalance) * ethPrice).toFixed(2)}</p>
                         <p className="informacao">{Number(ethBalance)} ETH</p>
                     </div>
                 </div>

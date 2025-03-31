@@ -21,21 +21,21 @@ const ReceiveXion = () => {
             }
         };
 
-        const qrCode = new QRCodeStyling({
-            width: 200,
-            height: 200,
-            data: xionAddress,
-            dotsOptions: { color: "#000", type: "dots" },
-            backgroundOptions: { color: "#fff" },
-        });
-
-        if (qrRef.current) {
-            qrRef.current.innerHTML = "";
-            qrCode.append(qrRef.current);
-        }
-
         fetchXionAddress();
     }, []);
+
+    const qrCode = new QRCodeStyling({
+        width: 200,
+        height: 200,
+        data: xionAddress,
+        dotsOptions: { color: "#000", type: "dots" },
+        backgroundOptions: { color: "#fff" },
+    });
+
+    if (qrRef.current) {
+        qrRef.current.innerHTML = "";
+        qrCode.append(qrRef.current);
+    }
 
     const handleCopy = () => {
         navigator.clipboard.writeText(xionAddress)
