@@ -8,5 +8,6 @@ export {
   getBalanceXion,
   getBalanceEthereum,
   getAddressEth,
-  getAddressXion
+  getAddressXion,
+  sendXionTransaction
 } from './transaction.js';
