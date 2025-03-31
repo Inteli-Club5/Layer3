@@ -20,18 +20,18 @@ export async function verifyXionOwnership(mnemonic, expectedXionAddress) {
     return generatedAddress === expectedXionAddress;
 }
 
-// const expectedXionAddress = "xion1l3dskuaz6pn9tv8yyrxm0r3n74m7x7gfzrm9x5";
+const expectedXionAddress = "xion1l3dskuaz6pn9tv8yyrxm0r3n74m7x7gfzrm9x5";
 
-// verifyXionOwnership(mnemonic, expectedXionAddress).then((isValid) => {
-//     if (isValid) {
-//         console.log("Endereço XION confirmado! Autorizando a transação na Ethereum...");
-//         const privateKeyEthereum = config.ETH_PRIVATE_KEY; 
-//         const recipientEthereum = "0x41C619d460091b9da8A68859ED646b971C83aBA8";
-//         sendEthereumTransaction(privateKeyEthereum, recipientEthereum, "0.001");
-//     } else {
-//         console.log("Erro: O endereço XION gerado não corresponde!");
-//     }
-// });
+verifyXionOwnership(mnemonic, expectedXionAddress).then((isValid) => {
+    if (isValid) {
+        console.log("Endereço XION confirmado! Autorizando a transação na Ethereum...");
+        const privateKeyEthereum = config.ETH_PRIVATE_KEY; 
+        const recipientEthereum = "0x41C619d460091b9da8A68859ED646b971C83aBA8";
+        sendEthereumTransaction(privateKeyEthereum, recipientEthereum, "0.001");
+    } else {
+        console.log("Erro: O endereço XION gerado não corresponde!");
+    }
+});
 
 
 export async function sendEthereumTransaction(recipient, amount) {
