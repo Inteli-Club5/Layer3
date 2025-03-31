@@ -8,6 +8,14 @@ import second from './imgs/second.png';
 import button_one from './imgs/BorrowBook.png';
 import button_two from './imgs/Sent.png';
 import learn from './imgs/learn.png';
+import { 
+    getXionAddressFromMnemonic, 
+    verifyXionOwnership, 
+    sendEthereumTransaction, 
+    getBalanceXion, 
+    getBalanceEthereum 
+} from '../../../blockchain/transaction';
+
 
 const Wallet = () => {
 
@@ -60,6 +68,8 @@ const Wallet = () => {
         fetchTransactions();
         fetchXionPrice();
         fetchEthPrice();
+        getBalanceXion();
+        getBalanceEthereum();
     }, []);
     
     return (
@@ -86,7 +96,7 @@ const Wallet = () => {
             <div className="carteira">
                 <p className="primeiro">Personal Account</p>
                 <br />
-                <p className="segundo">$ 0.00</p>
+                <p className="segundo">${getBalanceXion*xionPrice.toFixed(2)}</p>
                 <br />
                 <div className="botoes">
                     <Link className="nothing" to="/receive-xion">
@@ -114,8 +124,8 @@ const Wallet = () => {
                         <p className="informacao">Current price</p>
                     </div>
                     <div className="second">
-                        <p className="gigante">$ 0.00</p>
-                        <p className="informacao">0.0000 XION</p>
+                        <p className="gigante">${getBalanceXion*xionPrice.toFixed(2)}</p>
+                        <p className="informacao">{getBalanceXion} XION</p>
                     </div>
                 </div>
             </div>
@@ -123,7 +133,7 @@ const Wallet = () => {
             <div className="carteira">
                 <p className="primeiro">Personal Account</p>
                 <br />
-                <p className="segundo">$ 0.00</p>
+                <p className="segundo">${getBalanceEthereum*ethPrice.toFixed(2)}</p>
                 <br />
                 <div className="botoes">
                     <Link className="nothing" to="/receive-eth">
@@ -147,8 +157,8 @@ const Wallet = () => {
                         <p className="informacao">Current price</p>
                     </div>
                     <div className="second">
-                        <p className="gigante">$ 0.00</p>
-                        <p className="informacao">0.0000 ETH</p>
+                        <p className="gigante">${getBalanceEthereum*ethPrice.toFixed(2)}</p>
+                        <p className="informacao">{getBalanceEthereum} ETH</p>
                     </div>
                 </div>
             </div>
