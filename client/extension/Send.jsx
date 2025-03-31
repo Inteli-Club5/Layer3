@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import logo from '../src/components/imgs/layer3.png';
+import logo from './imgs/layer3.png';
 import { Link } from 'react-router-dom';
-import xion from '../src/components/imgs/xion_token.png';
-import eth from '../src/components/imgs/eth_token.png';
-import button_two from '../src/components/imgs/Sent.png';
+import xion from './imgs/xion_token.png';
+import eth from './imgs/eth_token.png';
+import button_two from './imgs/Sent.png';
 import {
     getAddressXion,
-    sendEthereumTransaction
+    sendXionTransaction
 } from '../../blockchain/index';
 
 const Send = () => {
@@ -29,10 +29,8 @@ const Send = () => {
 
     const handleSendTransaction = async () => {
         if (toAddress && value) {
-            await sendEthereumTransaction(toAddress, value);
+            await sendXionTransaction(xionAddress, toAddress, value);
             alert("Transaction sent successfully!");
-
-            window.location.href = "/wallet";
         } else {
             alert("Please enter a valid address and amount.");
         }
@@ -72,16 +70,18 @@ const Send = () => {
                         value={value}
                         onChange={(e) => setValue(e.target.value)}
                     />
-                    <img className="token" alt="eth" src={xion} />
+                    <img className="token" alt="eth" src={eth} />
                 </div>
                 <br />
                 <center>
                     <hr />
                     <br />
-                    <button onClick={handleSendTransaction}>
-                        <img src={button_two} alt="Share" />
-                        Send
-                    </button>
+                    <Link class="linkin" to="/wallet">
+                        <button onClick={handleSendTransaction}>
+                            <img src={button_two} alt="Share" />
+                            Send
+                        </button>
+                    </Link>
                 </center>
                 <div></div>
             </div>
