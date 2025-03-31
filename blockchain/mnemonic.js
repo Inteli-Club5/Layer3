@@ -1,4 +1,4 @@
-const { EnglishMnemonic } = require("@cosmjs/crypto");
+import { EnglishMnemonic } from "@cosmjs/crypto";
 
 const mnemonic = new EnglishMnemonic();
-console.log(mnemonic.words()); 
+console.log(mnemonic.words());

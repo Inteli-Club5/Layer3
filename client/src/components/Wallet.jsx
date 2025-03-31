@@ -8,20 +8,19 @@ import second from './imgs/second.png';
 import button_one from './imgs/BorrowBook.png';
 import button_two from './imgs/Sent.png';
 import learn from './imgs/learn.png';
-import { 
-    getXionAddressFromMnemonic, 
-    verifyXionOwnership, 
-    sendEthereumTransaction, 
-    getBalanceXion, 
-    getBalanceEthereum 
-} from '../../../blockchain/transaction';
 
+import {
+    getBalanceXion,
+    getBalanceEthereum
+  } from '../../../blockchain/index';
 
 const Wallet = () => {
 
     const [transactions, setTransactions] = useState([]);
     const [xionPrice, setXionPrice] = useState(0);
     const [ethPrice, setEthPrice] = useState(0);
+    const [xionBalance, setXionBalance] = useState(0);
+    const [ethBalance, setEthBalance] = useState(0);
 
     const cryptoCompareApiKey = import.meta.env.VITE_CRYPTO_COMPARE_API_KEY;
     useEffect(() => {
@@ -65,13 +64,23 @@ const Wallet = () => {
             }
         };
 
+        const fetchBalances = async () => {
+            try {
+                const xionBalance = await getBalanceXion();
+                const ethBalance = await getBalanceEthereum();
+                setXionBalance(xionBalance);
+                setEthBalance(ethBalance);
+            } catch (error) {
+                console.error("Erro ao buscar saldos:", error);
+            }
+        };
+
+        fetchBalances();
         fetchTransactions();
         fetchXionPrice();
         fetchEthPrice();
-        getBalanceXion();
-        getBalanceEthereum();
     }, []);
-    
+
     return (
         <div className="wallet">
             <br />
@@ -96,7 +105,7 @@ const Wallet = () => {
             <div className="carteira">
                 <p className="primeiro">Personal Account</p>
                 <br />
-                <p className="segundo">${getBalanceXion*xionPrice.toFixed(2)}</p>
+                <p className="segundo">${xionBalance * xionPrice.toFixed(2)}</p>
                 <br />
                 <div className="botoes">
                     <Link className="nothing" to="/receive-xion">
@@ -124,8 +133,8 @@ const Wallet = () => {
                         <p className="informacao">Current price</p>
                     </div>
                     <div className="second">
-                        <p className="gigante">${getBalanceXion*xionPrice.toFixed(2)}</p>
-                        <p className="informacao">{getBalanceXion} XION</p>
+                        <p className="gigante">${xionBalance * xionPrice.toFixed(2)}</p>
+                        <p className="informacao">{xionBalance} XION</p>
                     </div>
                 </div>
             </div>
@@ -133,7 +142,7 @@ const Wallet = () => {
             <div className="carteira">
                 <p className="primeiro">Personal Account</p>
                 <br />
-                <p className="segundo">${getBalanceEthereum*ethPrice.toFixed(2)}</p>
+                <p className="segundo">${ethBalance * ethPrice.toFixed(2)}</p>
                 <br />
                 <div className="botoes">
                     <Link className="nothing" to="/receive-eth">
@@ -157,8 +166,8 @@ const Wallet = () => {
                         <p className="informacao">Current price</p>
                     </div>
                     <div className="second">
-                        <p className="gigante">${getBalanceEthereum*ethPrice.toFixed(2)}</p>
-                        <p className="informacao">{getBalanceEthereum} ETH</p>
+                        <p className="gigante">${ethBalance * ethPrice.toFixed(2)}</p>
+                        <p className="informacao">{ethBalance} ETH</p>
                     </div>
                 </div>
             </div>

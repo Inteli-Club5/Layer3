@@ -1,7 +1,7 @@
 // xion-transactions.js
-const { getSigningClient } = require("./xion-connect");
-const { getMyAddress } = require("./xion-wallets");
-const config = require('./config');
+import { getSigningClient } from "./xion-connect.js";
+import { getMyAddress } from "./xion-wallets.js";
+import config from './config.js';
 
 /**
  * Sends tokens from your address to a recipient
@@ -13,7 +13,7 @@ const config = require('./config');
  * @param {string} memo - Optional transaction memo
  * @returns {object} Transaction result with hash and gas usage
  */
-async function sendTokens(recipientAddress, amount, denom = "uxion", memo = "") {
+export async function sendTokens(recipientAddress, amount, denom = "uxion", memo = "") {
   const client = await getSigningClient();
   const senderAddress = await getMyAddress();
   
@@ -40,7 +40,7 @@ async function sendTokens(recipientAddress, amount, denom = "uxion", memo = "") 
  * @param {array} funds - Optional funds to send with the execution
  * @returns {object} Transaction result with hash and gas usage
  */
-async function executeContract(contractAddress, msg, funds = []) {
+export async function executeContract(contractAddress, msg, funds = []) {
   const client = await getSigningClient();
   const senderAddress = await getMyAddress();
   
@@ -66,7 +66,7 @@ async function executeContract(contractAddress, msg, funds = []) {
  * @param {Uint8Array} wasmBinary - The contract WASM binary
  * @returns {object} Upload result with code ID and transaction hash
  */
-async function uploadContract(wasmBinary) {
+export async function uploadContract(wasmBinary) {
   const client = await getSigningClient();
   const senderAddress = await getMyAddress();
   
@@ -91,7 +91,7 @@ async function uploadContract(wasmBinary) {
  * @param {array} funds - Optional funds to send with instantiation
  * @returns {object} Result with contract address and transaction hash
  */
-async function instantiateContract(codeId, initMsg, label, funds = []) {
+export async function instantiateContract(codeId, initMsg, label, funds = []) {
   const client = await getSigningClient();
   const senderAddress = await getMyAddress();
   
@@ -109,10 +109,3 @@ async function instantiateContract(codeId, initMsg, label, funds = []) {
     transactionHash: result.transactionHash
   };
 }
-
-module.exports = {
-  sendTokens,
-  executeContract,
-  uploadContract,
-  instantiateContract
-};

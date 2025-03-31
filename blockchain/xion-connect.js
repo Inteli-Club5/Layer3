@@ -1,40 +1,36 @@
-// xion-connect.js
-const { StargateClient, SigningStargateClient, GasPrice } = require("@cosmjs/stargate");
-const { DirectSecp256k1HdWallet } = require("@cosmjs/proto-signing");
-const config = require('./config');
+import { SigningStargateClient, StargateClient } from "@cosmjs/stargate";
+import { DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
+import config from "./config.js";
 
 // Validate configuration before proceeding
-config.validateConfig();
+//config.validateConfig();
+
+let signingClient = null;
+let queryClient = null;
 
 /**
- * Creates a read-only client for querying the blockchain
- * This client can be used for all operations that don't require signing
+ * Gets a signing client for transactions
+ * 
+ * @returns {SigningStargateClient} A signing client instance
  */
-async function getQueryClient() {
-  return await StargateClient.connect(config.XION_RPC_URL);
+export async function getSigningClient() {
+    if (!signingClient) {
+        const wallet = await DirectSecp256k1HdWallet.fromMnemonic(config.MNEMONIC, { prefix: "xion" });
+        signingClient = await SigningStargateClient.connectWithSigner(config.XION_RPC_URL, wallet);
+    }
+    return signingClient;
 }
 
 /**
- * Creates a signing client that can perform transactions
- * By default uses the mnemonic from environment variables
- * Can optionally accept a different mnemonic for multi-wallet scenarios
+ * Gets a query client for blockchain queries
+ * 
+ * @returns {StargateClient} A query client instance
  */
-async function getSigningClient(mnemonic = config.MNEMONIC) {
-  // Create wallet from mnemonic
-  const wallet = await DirectSecp256k1HdWallet.fromMnemonic(mnemonic, {
-    prefix: "xion" // XION address prefix
-  });
-  
-  // Create and return a signing client
-  return await SigningStargateClient.connectWithSigner(
-    config.XION_RPC_URL,
-    wallet,
-    { gasPrice: GasPrice.fromString("0.025uxion") }
-  );
+export async function getQueryClient() {
+    if (!queryClient) {
+        queryClient = await StargateClient.connect(config.XION_RPC_URL);
+    }
+    return queryClient;
 }
 
-module.exports = {
-  getQueryClient,
-  getSigningClient,
-  CHAIN_ID: config.CHAIN_ID
-};
+export const CHAIN_ID = config.CHAIN_ID;

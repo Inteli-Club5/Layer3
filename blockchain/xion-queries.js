@@ -1,4 +1,4 @@
-const { getQueryClient } = require("./xion-connect");
+import { getQueryClient } from "./xion-connect.js";
 
 /**
  * Gets an account's balance for a specific token
@@ -7,8 +7,8 @@ const { getQueryClient } = require("./xion-connect");
  * @param {string} denom - The token denomination (default: uxion)
  * @returns {string} The account balance amount
  */
-async function getBalance(address, denom = "uxion") {
-  const client = await getQueryClient();
+export async function getBalance(address, denom = "uxion") {
+  const client = getQueryClient();
   const balance = await client.getBalance(address, denom);
   return balance.amount;
 }
@@ -19,8 +19,8 @@ async function getBalance(address, denom = "uxion") {
  * @param {string} address - The account address to check
  * @returns {object} Account information including sequence numbers
  */
-async function getAccount(address) {
-  const client = await getQueryClient();
+export async function getAccount(address) {
+  const client = getQueryClient();
   return await client.getAccount(address);
 }
 
@@ -30,8 +30,8 @@ async function getAccount(address) {
  * @param {string} hash - The transaction hash
  * @returns {object} Complete transaction details
  */
-async function getTransaction(hash) {
-  const client = await getQueryClient();
+export async function getTransaction(hash) {
+  const client = getQueryClient();
   return await client.getTx(hash);
 }
 
@@ -42,8 +42,8 @@ async function getTransaction(hash) {
  * @param {number} height - The block height (optional)
  * @returns {object} Block data including transactions
  */
-async function getBlock(height) {
-  const client = await getQueryClient();
+export async function getBlock(height) {
+  const client = getQueryClient();
   return await client.getBlock(height);
 }
 
@@ -52,8 +52,8 @@ async function getBlock(height) {
  * 
  * @returns {number} The current block height
  */
-async function getChainHeight() {
-  const client = await getQueryClient();
+export async function getChainHeight() {
+  const client = getQueryClient();
   return await client.getHeight();
 }
 
@@ -64,16 +64,7 @@ async function getChainHeight() {
  * @param {object} queryMsg - The query message in JSON format
  * @returns {object} Query result from the contract
  */
-async function queryContract(contractAddress, queryMsg) {
-  const client = await getQueryClient();
+export async function queryContract(contractAddress, queryMsg) {
+  const client = getQueryClient();
   return await client.queryContractSmart(contractAddress, queryMsg);
 }
-
-module.exports = {
-  getBalance,
-  getAccount,
-  getTransaction,
-  getBlock,
-  getChainHeight,
-  queryContract
-};

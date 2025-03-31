@@ -1,46 +1,40 @@
-const fs = require('fs');
-const { getMyAddress } = require('./xion-wallets');
-const { getBalance, getAccount, queryContract, getChainHeight } = require('./xion-queries');
-const { sendTokens, executeContract, uploadContract, instantiateContract } = require('./xion-transactions');
-const { ethers } = require("ethers");
-const config = require('./config');
-const { DirectSecp256k1HdWallet } = require("@cosmjs/proto-signing");
+import fs from 'fs';
+import { getMyAddress } from './xion-wallets.js';
+import { getBalance, getAccount, queryContract, getChainHeight } from './xion-queries.js';
+import { sendTokens, executeContract, uploadContract, instantiateContract } from './xion-transactions.js';
+import { ethers } from "ethers";
+import config from './config.js';
+import { DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 
 const ALCHEMY_API_URL = config.ALCHEMY_API_URL; 
 const SENDER_PRIVATE_KEY = config.ETH_PRIVATE_KEY;
 
-async function getXionAddressFromMnemonic(mnemonic) {
+export async function getXionAddressFromMnemonic(mnemonic) {
     const wallet = await DirectSecp256k1HdWallet.fromMnemonic(mnemonic, { prefix: "xion" });
     const accounts = await wallet.getAccounts();
     return accounts[0].address;
 }
 
-// Teste com seu mnemonic
-const mnemonic = config.MNEMONIC;
-getXionAddressFromMnemonic(mnemonic).then((address) => {
-    console.log("Endereço gerado da XION:", address);
-});
-
-async function verifyXionOwnership(mnemonic, expectedXionAddress) {
+export async function verifyXionOwnership(mnemonic, expectedXionAddress) {
     const generatedAddress = await getXionAddressFromMnemonic(mnemonic);
     return generatedAddress === expectedXionAddress;
 }
 
-const expectedXionAddress = "xion1l3dskuaz6pn9tv8yyrxm0r3n74m7x7gfzrm9x5";
+// const expectedXionAddress = "xion1l3dskuaz6pn9tv8yyrxm0r3n74m7x7gfzrm9x5";
 
-verifyXionOwnership(mnemonic, expectedXionAddress).then((isValid) => {
-    if (isValid) {
-        console.log("Endereço XION confirmado! Autorizando a transação na Ethereum...");
-        const privateKeyEthereum = config.ETH_PRIVATE_KEY; 
-        const recipientEthereum = "0x41C619d460091b9da8A68859ED646b971C83aBA8";
-        sendEthereumTransaction(privateKeyEthereum, recipientEthereum, "0.001");
-    } else {
-        console.log("Erro: O endereço XION gerado não corresponde!");
-    }
-});
+// verifyXionOwnership(mnemonic, expectedXionAddress).then((isValid) => {
+//     if (isValid) {
+//         console.log("Endereço XION confirmado! Autorizando a transação na Ethereum...");
+//         const privateKeyEthereum = config.ETH_PRIVATE_KEY; 
+//         const recipientEthereum = "0x41C619d460091b9da8A68859ED646b971C83aBA8";
+//         sendEthereumTransaction(privateKeyEthereum, recipientEthereum, "0.001");
+//     } else {
+//         console.log("Erro: O endereço XION gerado não corresponde!");
+//     }
+// });
 
 
-async function sendEthereumTransaction(privateKey, recipient, amount) {
+export async function sendEthereumTransaction(privateKey, recipient, amount) {
     const provider = new ethers.JsonRpcProvider(ALCHEMY_API_URL);
     const wallet = new ethers.Wallet(SENDER_PRIVATE_KEY, provider);
 
@@ -55,7 +49,7 @@ async function sendEthereumTransaction(privateKey, recipient, amount) {
     console.log("Transação enviada! Hash:", transaction.hash);
 }
 
-async function getBalanceXion () {
+export async function getBalanceXion () {
     const myAddress = await getMyAddress();
     console.log(`Your Xion wallet address: ${myAddress}`);
     
@@ -63,9 +57,7 @@ async function getBalanceXion () {
     console.log(`Your Xion balance: ${balance} uxion`);
 }
 
-getBalanceXion();
-
-async function getBalanceEthereum() {
+export async function getBalanceEthereum() {
     const provider = new ethers.JsonRpcProvider(ALCHEMY_API_URL);
     const wallet = new ethers.Wallet(SENDER_PRIVATE_KEY, provider);
     
@@ -73,13 +65,3 @@ async function getBalanceEthereum() {
     console.log(`Your Ethereum wallet address: ${wallet.address}`);
     console.log(`Your Ethereum balance: ${ethers.formatEther(balance)} ETH`);
 }
-
-getBalanceEthereum();
-
-module.exports = { 
-    getXionAddressFromMnemonic, 
-    verifyXionOwnership, 
-    sendEthereumTransaction, 
-    getBalanceXion, 
-    getBalanceEthereum 
-};

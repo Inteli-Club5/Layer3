@@ -1,8 +1,8 @@
 // examples.js
-const fs = require('fs');
-const { getMyAddress } = require('./xion-wallets');
-const { getBalance, getAccount, queryContract, getChainHeight } = require('./xion-queries');
-const { sendTokens, executeContract, uploadContract, instantiateContract } = require('./xion-transactions');
+import fs from 'fs';
+import { getMyAddress } from './xion-wallets.js';
+import { getBalance, getAccount, queryContract, getChainHeight } from './xion-queries.js';
+import { sendTokens, executeContract, uploadContract, instantiateContract } from './xion-transactions.js';
 
 // Main function to run all examples
 async function runExamples() {

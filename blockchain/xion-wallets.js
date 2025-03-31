@@ -1,37 +1,43 @@
-// xion-wallets.js
-const { DirectSecp256k1HdWallet } = require("@cosmjs/proto-signing");
-const config = require('./config');
+import { DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
+import config from "./config.js";
+
+let wallet = null;
 
 /**
- * Gets the address associated with the configured mnemonic
+ * Gets the wallet instance using the mnemonic from the configuration
  * 
- * @returns {Promise<string>} The wallet address
+ * @returns {Promise} A wallet instance
  */
-async function getMyAddress() {
-  const wallet = await DirectSecp256k1HdWallet.fromMnemonic(config.MNEMONIC, {
-    prefix: "xion" // XION address prefix
-  });
-  
-  const [firstAccount] = await wallet.getAccounts();
-  return firstAccount.address;
+export async function getWallet() {
+    if (!wallet) {
+        wallet = await DirectSecp256k1HdWallet.fromMnemonic(config.MNEMONIC, { prefix: "xion" });
+    }
+    return wallet;
 }
 
 /**
- * Generates a new wallet (useful for creating recipient wallets for testing)
+ * Gets the address of the wallet
  * 
- * @returns {Promise<object>} Object containing mnemonic and address
+ * @returns {string} The wallet address
  */
-async function generateWallet() {
-  const wallet = await DirectSecp256k1HdWallet.generate(24, {
-    prefix: "xion" // XION address prefix
-  });
-  
-  const [firstAccount] = await wallet.getAccounts();
-  
-  return {
-    mnemonic: wallet.mnemonic,
-    address: firstAccount.address
-  };
+export async function getMyAddress() {
+    const wallet = await getWallet();
+    const accounts = await wallet.getAccounts();
+    return accounts[0].address;
+}
+
+/**
+ * Generates a new wallet with a random mnemonic
+ * 
+ * @returns {object} An object containing the mnemonic and address
+ */
+export async function generateWallet() {
+    const newWallet = await DirectSecp256k1HdWallet.generate(24, { prefix: "xion" });
+    const accounts = await newWallet.getAccounts();
+    return {
+        mnemonic: newWallet.mnemonic,
+        address: accounts[0].address
+    };
 }
 
 /**
@@ -40,17 +46,11 @@ async function generateWallet() {
  * @param {string} mnemonic - The wallet mnemonic
  * @returns {Promise<string>} The wallet address
  */
-async function getAddressFromMnemonic(mnemonic) {
-  const wallet = await DirectSecp256k1HdWallet.fromMnemonic(mnemonic, {
-    prefix: "xion" // XION address prefix
-  });
-  
-  const [firstAccount] = await wallet.getAccounts();
-  return firstAccount.address;
+export async function getAddressFromMnemonic(mnemonic) {
+    const wallet = await DirectSecp256k1HdWallet.fromMnemonic(mnemonic, {
+        prefix: "xion" // XION address prefix
+    });
+    
+    const [firstAccount] = await wallet.getAccounts();
+    return firstAccount.address;
 }
-
-module.exports = {
-  getMyAddress,
-  generateWallet,
-  getAddressFromMnemonic
-};
