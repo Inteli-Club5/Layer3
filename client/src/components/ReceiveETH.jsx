@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 import QRCodeStyling from "qr-code-styling";
 import share from './imgs/share.png';
 import eth from './imgs/eth_token.png';
+import {
+    getAddressEth
+  } from '../../../blockchain/index';
 
 const ReceiveETH = () => {
     const qrRef = useRef(null);
-    const ethAddress = "0x6a395e7AfD2Ddc7F68498f62D8AD3b72992E8Ab0";
+    const ethAddress = getAddressEth();
 
     useEffect(() => {
         const qrCode = new QRCodeStyling({

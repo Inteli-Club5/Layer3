@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 import QRCodeStyling from "qr-code-styling";
 import share from './imgs/share.png';
 import xion from './imgs/xion_token.png';
+import {
+    getAddressXion
+  } from '../../../blockchain/index';
 
 const ReceiveXion = () => {
     const qrRef = useRef(null);
-    const xionAddress = "xion1sjv8p79cwm08m8nm8e6yntuvjxj53hd7e4l6y3";
+    const xionAddress = getAddressXion;
 
     useEffect(() => {
         const qrCode = new QRCodeStyling({

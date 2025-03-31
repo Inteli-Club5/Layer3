@@ -65,3 +65,15 @@ export async function getBalanceEthereum() {
     console.log(`Your Ethereum wallet address: ${wallet.address}`);
     console.log(`Your Ethereum balance: ${ethers.formatEther(balance)} ETH`);
 }
+
+export async function getAddressEth() {
+    const provider = new ethers.JsonRpcProvider(ALCHEMY_API_URL);
+    const wallet = new ethers.Wallet(SENDER_PRIVATE_KEY, provider);
+
+    return wallet.address;
+}
+
+export async function getAddressXion() {
+    const myAddress = await getMyAddress();
+    return myAddress;
+}

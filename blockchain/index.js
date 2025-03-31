@@ -6,5 +6,7 @@ export {
   verifyXionOwnership,
   sendEthereumTransaction,
   getBalanceXion,
-  getBalanceEthereum
+  getBalanceEthereum,
+  getAddressEth,
+  getAddressXion
 } from './transaction.js';
