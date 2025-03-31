@@ -55,6 +55,8 @@ export async function getBalanceXion () {
     
     const balance = await getBalance(myAddress);
     console.log(`Your Xion balance: ${balance} uxion`);
+
+    return balance;
 }
 
 export async function getBalanceEthereum() {
@@ -64,6 +66,8 @@ export async function getBalanceEthereum() {
     const balance = await provider.getBalance(wallet.address);
     console.log(`Your Ethereum wallet address: ${wallet.address}`);
     console.log(`Your Ethereum balance: ${ethers.formatEther(balance)} ETH`);
+
+    return balance;
 }
 
 export async function getAddressEth() {

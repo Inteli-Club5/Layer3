@@ -8,7 +8,7 @@ import { getQueryClient } from "./xion-connect.js";
  * @returns {string} The account balance amount
  */
 export async function getBalance(address, denom = "uxion") {
-  const client = getQueryClient();
+  const client = await getQueryClient();
   const balance = await client.getBalance(address, denom);
   return balance.amount;
 }
@@ -20,7 +20,7 @@ export async function getBalance(address, denom = "uxion") {
  * @returns {object} Account information including sequence numbers
  */
 export async function getAccount(address) {
-  const client = getQueryClient();
+  const client = await getQueryClient();
   return await client.getAccount(address);
 }
 
@@ -31,7 +31,7 @@ export async function getAccount(address) {
  * @returns {object} Complete transaction details
  */
 export async function getTransaction(hash) {
-  const client = getQueryClient();
+  const client = await getQueryClient();
   return await client.getTx(hash);
 }
 
@@ -43,7 +43,7 @@ export async function getTransaction(hash) {
  * @returns {object} Block data including transactions
  */
 export async function getBlock(height) {
-  const client = getQueryClient();
+  const client = await getQueryClient();
   return await client.getBlock(height);
 }
 
@@ -53,7 +53,7 @@ export async function getBlock(height) {
  * @returns {number} The current block height
  */
 export async function getChainHeight() {
-  const client = getQueryClient();
+  const client = await getQueryClient();
   return await client.getHeight();
 }
 
@@ -65,6 +65,6 @@ export async function getChainHeight() {
  * @returns {object} Query result from the contract
  */
 export async function queryContract(contractAddress, queryMsg) {
-  const client = getQueryClient();
+  const client = await getQueryClient();
   return await client.queryContractSmart(contractAddress, queryMsg);
 }

@@ -68,6 +68,10 @@ const Wallet = () => {
             try {
                 const xionBalance = await getBalanceXion();
                 const ethBalance = await getBalanceEthereum();
+                console.log("XION Balance:", xionBalance);
+                console.log("ETH Balance:", ethBalance);
+
+                console.log(xionBalance);
                 setXionBalance(xionBalance);
                 setEthBalance(ethBalance);
             } catch (error) {
@@ -105,7 +109,7 @@ const Wallet = () => {
             <div className="carteira">
                 <p className="primeiro">Personal Account</p>
                 <br />
-                <p className="segundo">${xionBalance * xionPrice.toFixed(2)}</p>
+                <p className="segundo">${Number(xionBalance) * xionPrice.toFixed(2)}</p>
                 <br />
                 <div className="botoes">
                     <Link className="nothing" to="/receive-xion">
@@ -133,8 +137,8 @@ const Wallet = () => {
                         <p className="informacao">Current price</p>
                     </div>
                     <div className="second">
-                        <p className="gigante">${xionBalance * xionPrice.toFixed(2)}</p>
-                        <p className="informacao">{xionBalance} XION</p>
+                        <p className="gigante">${Number(xionBalance) * xionPrice.toFixed(2)}</p>
+                        <p className="informacao">{Number(xionBalance)} XION</p>
                     </div>
                 </div>
             </div>
@@ -142,7 +146,7 @@ const Wallet = () => {
             <div className="carteira">
                 <p className="primeiro">Personal Account</p>
                 <br />
-                <p className="segundo">${ethBalance * ethPrice.toFixed(2)}</p>
+                <p className="segundo">${Number(ethBalance) * ethPrice.toFixed(2)}</p>
                 <br />
                 <div className="botoes">
                     <Link className="nothing" to="/receive-eth">
@@ -166,8 +170,8 @@ const Wallet = () => {
                         <p className="informacao">Current price</p>
                     </div>
                     <div className="second">
-                        <p className="gigante">${ethBalance * ethPrice.toFixed(2)}</p>
-                        <p className="informacao">{ethBalance} ETH</p>
+                        <p className="gigante">${Number(ethBalance) * ethPrice.toFixed(2)}</p>
+                        <p className="informacao">{Number(ethBalance)} ETH</p>
                     </div>
                 </div>
             </div>

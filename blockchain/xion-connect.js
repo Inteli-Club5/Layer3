@@ -11,7 +11,7 @@ let queryClient = null;
 /**
  * Gets a signing client for transactions
  * 
- * @returns {SigningStargateClient} A signing client instance
+ * @returns {Promise} A signing client instance
  */
 export async function getSigningClient() {
     if (!signingClient) {
@@ -24,7 +24,7 @@ export async function getSigningClient() {
 /**
  * Gets a query client for blockchain queries
  * 
- * @returns {StargateClient} A query client instance
+ * @returns {Promise} A query client instance
  */
 export async function getQueryClient() {
     if (!queryClient) {

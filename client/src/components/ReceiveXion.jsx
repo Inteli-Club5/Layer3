@@ -10,7 +10,7 @@ import {
 
 const ReceiveXion = () => {
     const qrRef = useRef(null);
-    const xionAddress = getAddressXion;
+    const xionAddress = getAddressXion();
 
     useEffect(() => {
         const qrCode = new QRCodeStyling({
