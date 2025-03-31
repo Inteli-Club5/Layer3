@@ -6,8 +6,8 @@ import eth from './imgs/eth_token.png';
 import button_two from './imgs/Sent.png';
 import {
     getAddressXion,
-    sendEthereumTransaction
-} from '../../../blockchain/index';
+    sendXionTransaction
+} from '../../blockchain/index';
 
 const Send = () => {
     const [toAddress, setToAddress] = useState("");
@@ -29,9 +29,8 @@ const Send = () => {
 
     const handleSendTransaction = async () => {
         if (toAddress && value) {
-            await sendEthereumTransaction(toAddress, value);
+            await sendXionTransaction(xionAddress, toAddress, value);
             alert("Transaction sent successfully!");
-            window.location.href = "/wallet";
         } else {
             alert("Please enter a valid address and amount.");
         }
@@ -71,16 +70,18 @@ const Send = () => {
                         value={value}
                         onChange={(e) => setValue(e.target.value)}
                     />
-                    <img className="token" alt="eth" src={xion} />
+                    <img className="token" alt="eth" src={eth} />
                 </div>
                 <br />
                 <center>
                     <hr />
                     <br />
-                    <button onClick={handleSendTransaction}>
-                        <img src={button_two} alt="Share" />
-                        Send
-                    </button>
+                    <Link class="linkin" to="/wallet">
+                        <button onClick={handleSendTransaction}>
+                            <img src={button_two} alt="Share" />
+                            Send
+                        </button>
+                    </Link>
                 </center>
                 <div></div>
             </div>
