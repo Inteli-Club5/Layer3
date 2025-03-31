@@ -52,7 +52,7 @@ HACKATHON-XION
 
 ### Front-end
 
-#### Pacotes externos
+#### External packages
 - React
 - Vite
 
@@ -70,5 +70,5 @@ We plan to implement new features while thinking about the project on long term,
 - <a href="https://www.linkedin.com/in/pedro-jorge-alves/">Pedro Jorge</a> 
 - <a href="https://www.linkedin.com/in/victor-garcia-dos-santos/">Victor Garcia</a> 
 
-## Agradecimentos
+## Acknowledgement
 We are thankful for Xion, Ethereum, and NearX for the opportunity to showcase our abilities and create an amazing project with a solid and robust technology.
