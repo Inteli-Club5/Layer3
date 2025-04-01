@@ -1,6 +1,5 @@
 # Layer3 - The simplest, most practical, and fastest way to navigate and learn Web3. 
-![Logo02](https://github.com/user-attachments/assets/075a73d4-2da7-4eb9-aaff-db8655b91fa4)
-
+![Logo02 (1)](https://github.com/user-attachments/assets/e59233c2-f595-4d01-9f21-36ee80a1b701)
 
 ## What is Layer3?
 
